@@ -15,6 +15,7 @@ type
   public
     constructor Create;
     Destructor Destroy; override;
+    function GSONObject(AValue: String): IJSONCore<T>;
     function JsonArrayToObject(AJsonArray: TJsonArray): IJSONCore<T>; overload;
     function JsonArrayToObject(AJsonArray: String): IJSONCore<T>; overload;
     function ObjectToJsonArray(AObject: TObjectList<T>): IJSONCore<T>; overload;
@@ -41,6 +42,11 @@ destructor TJson4DSerialize<T>.Destroy;
 begin
 
   inherited;
+end;
+
+function TJson4DSerialize<T>.GSONObject(AValue: String): IJSONCore<T>;
+begin
+  Result:= FJson.GSONObject(AValue);
 end;
 
 function TJson4DSerialize<T>.JsonArrayToObject(AJsonArray: String)

@@ -13,6 +13,7 @@ type
 
   TJSON4DCore<T: Class, constructor> = class(TInterfacedObject, IJSONCore<T>)
   private
+    FJson: TJSONValue;
     FArrayJson: TJSONArray;
     FDestroyObjectList: Boolean;
     FListObj: TObjectList<T>;
@@ -24,6 +25,8 @@ type
     function Add(AJsonObject: T): IJSONCore<T>; overload;
     function DeserializeArray(AJsonArray: TJSONArray): IJSONCore<T>; overload;
     function DeserializeArray(AJsonArray: string): IJSONCore<T>; overload;
+    function GSONObject(AValue: String): IJSONCore<T>;
+    function GetAttributeJson(AKey: String): String;
     function ListObjects: TObjectList<T>;
     function JsonArray: String;
   end;
@@ -49,6 +52,7 @@ begin
   FArrayJson := TJSONArray.Create;
   FDestroyObjectList := ADestroyObjectList;
   FListObj := TObjectList<T>.Create();
+  FJson := nil;
 end;
 
 function TJSON4DCore<T>.DeserializeArray(AJsonArray: TJSONArray): IJSONCore<T>;
@@ -80,7 +84,20 @@ begin
   FArrayJson.Free;
   if FDestroyObjectList then
     FListObj.Free;
+  if Assigned(FJson) then
+    FJson.Free;
   inherited;
+end;
+
+function TJSON4DCore<T>.GetAttributeJson(AKey: String): String;
+begin
+  Result := FJson.GetValue<String>(AKey);
+end;
+
+function TJSON4DCore<T>.GSONObject(AValue: String): IJSONCore<T>;
+begin
+  Result := Self;
+  FJson := TJSONObject.ParseJSONValue(AValue);
 end;
 
 function TJSON4DCore<T>.JsonArray: String;
