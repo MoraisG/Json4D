@@ -46,20 +46,18 @@ end;
 
 function TJson4DSerialize<T>.GSONObject(AValue: String): IJSONCore<T>;
 begin
-  Result := FJson.GSONObject(AValue);
+  Result:= FJson.GSONObject(AValue);
 end;
 
 function TJson4DSerialize<T>.JsonArrayToObject(AJsonArray: String)
   : IJSONCore<T>;
 begin
-  FJson.DeserializeArray(AJsonArray);
   Result := FJson;
 end;
 
 function TJson4DSerialize<T>.JsonArrayToObject(AJsonArray: TJsonArray)
   : IJSONCore<T>;
 begin
-  FJson.DeserializeArray(AJsonArray);
   Result := FJson;
 end;
 
