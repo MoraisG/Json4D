@@ -20,6 +20,7 @@ type
     function JsonArrayToObject(AJsonArray: String): IJSONCore<T>; overload;
     function ObjectToJsonArray(AObject: TObjectList<T>): IJSONCore<T>; overload;
     function ObjectToJsonArray(AObject: TObject): IJSONCore<T>; overload;
+    function This: IJSONCore<T>;
     class function New: ISerializeJSON4D<T>;
   end;
 
@@ -93,6 +94,11 @@ begin
   finally
     context.Free;
   end;
+  Result := FJson;
+end;
+
+function TJson4DSerialize<T>.This: IJSONCore<T>;
+begin
   Result := FJson;
 end;
 

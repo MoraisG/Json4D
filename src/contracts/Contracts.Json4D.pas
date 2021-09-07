@@ -16,6 +16,7 @@ type
     function JsonArrayToObject(AJsonArray: String): IJSONCore<T>; overload;
     function ObjectToJsonArray(AObject: TObjectList<T>): IJSONCore<T>; overload;
     function ObjectToJsonArray(AObject: TObject): IJSONCore<T>; overload;
+    function This: IJSONCore<T>;
   end;
 
   IJSONCore<T: Class> = interface
