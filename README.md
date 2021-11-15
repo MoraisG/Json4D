@@ -33,7 +33,7 @@ begin
 end;
 ```
 
-1. JsonArry to ObjectList. Thread Safe.
+1. JsonArray to ObjectList. Thread Safe.
 ```Pascal 
 implementation
  
