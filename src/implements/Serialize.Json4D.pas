@@ -13,7 +13,8 @@ type
   private
     FJson: IJSONCore<T>;
   public
-    constructor Create;
+    constructor Create; overload;
+    constructor Create(AOwns : Boolean);overload;
     Destructor Destroy; override;
     function GSONObject(AValue: String): IJSONCore<T>;
     function JsonArrayToObject(AJsonArray: TJsonArray): IJSONCore<T>; overload;
@@ -21,7 +22,8 @@ type
     function ObjectToJsonArray(AObject: TObjectList<T>): IJSONCore<T>; overload;
     function ObjectToJsonArray(AObject: TObject): IJSONCore<T>; overload;
     function This: IJSONCore<T>;
-    class function New: ISerializeJSON4D<T>;
+    class function New: ISerializeJSON4D<T>;overload;
+    class function New(AOwns : Boolean): ISerializeJSON4D<T>;overload;
   end;
 
 implementation
@@ -37,6 +39,11 @@ uses
 constructor TJson4DSerialize<T>.Create;
 begin
   FJson := TJSON4DCore<T>.New;
+end;
+
+constructor TJson4DSerialize<T>.Create(AOwns: Boolean);
+begin
+  FJson := TJSON4DCore<T>.New(AOwns);
 end;
 
 destructor TJson4DSerialize<T>.Destroy;
@@ -55,6 +62,11 @@ function TJson4DSerialize<T>.JsonArrayToObject(AJsonArray: String)
 begin
   FJson.DeserializeArray(AJsonArray);
   Result := FJson;
+end;
+
+class function TJson4DSerialize<T>.New(AOwns: Boolean): ISerializeJSON4D<T>;
+begin
+  Result := Self.Create(AOwns)
 end;
 
 function TJson4DSerialize<T>.JsonArrayToObject(AJsonArray: TJsonArray)
