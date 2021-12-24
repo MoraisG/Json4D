@@ -48,9 +48,9 @@ var
 begin
  LSerialize := TJson4DSerialize<TArrayDTO>.New;
  LSerialize.JsonArrayToObject(LArrayJson);
- for LDTO in This.ListObjects do
+ for LDTO in LSerialize.This.ListObjects do
  begin
-   
+   {Aqui voce obtem as informações do objeto}
  end;
 end;
  
