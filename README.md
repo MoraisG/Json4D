@@ -56,7 +56,7 @@ end;
  
 procedure StringJsonArray4D(LArrayJson : String);
 var
- LSerialize : ISerializeJSON4D<TArrayDTO>;
+ ListDTO : TObjectList<TArrayDTO>;
 begin
     ListDTO := 
       TJson4DSerialize<TArrayDTO>.New(false)
